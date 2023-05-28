@@ -2,7 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:flutter_auth_bloc/data/datasources/api_datasource.dart';
+import 'package:flutter_auth_bloc/data/datasources/auth_datasource.dart';
 import 'package:flutter_auth_bloc/data/models/request/register_mode.dart';
 
 import '../../data/models/response/register_response_model.dart';
@@ -11,7 +11,7 @@ part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final ApiDataSource dataSource;
+  final AuthDataSource dataSource;
   RegisterBloc(
     this.dataSource,
   ) : super(RegisterInitial()) {

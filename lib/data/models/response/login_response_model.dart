@@ -1,36 +1,30 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// To parse this JSON data, do
-//
-//     final loginResponseModel = loginResponseModelFromJson(jsonString);
-
 import 'dart:convert';
 
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class LoginResponseModel {
-  String? accessToken;
-  String? refreshToken;
-
+  final String accessToken;
+  final String refreshToken;
   LoginResponseModel({
-    this.accessToken,
-    this.refreshToken,
+    required this.accessToken,
+    required this.refreshToken,
   });
 
-  factory LoginResponseModel.fromRawJson(String str) =>
-      LoginResponseModel.fromJson(json.decode(str));
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'access_token': accessToken,
+      'refresh_token': refreshToken,
+    };
+  }
 
-  String toRawJson() => json.encode(toJson());
+  factory LoginResponseModel.fromMap(Map<String, dynamic> map) {
+    return LoginResponseModel(
+      accessToken: map['access_token'] as String,
+      refreshToken: map['refresh_token'] as String,
+    );
+  }
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
-      LoginResponseModel(
-        accessToken: json["access_token"],
-        refreshToken: json["refresh_token"],
-      );
+  String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toJson() => {
-        "access_token": accessToken,
-        "refresh_token": refreshToken,
-      };
-
-  @override
-  String toString() =>
-      'LoginResponseModel(accessToken: $accessToken, refreshToken: $refreshToken)';
+  factory LoginResponseModel.fromJson(String source) =>
+      LoginResponseModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
